@@ -16,7 +16,9 @@ export default function LoginPage(){
         submitForm,
     } = useLoginState();
 
-    const { forgetPasswordHandler } = useLoginForgetPasswordState();
+    const { forgetPasswordHandler } = useLoginForgetPasswordState({
+        email: loginForm.getter.values.email
+    });
 
     return(
        <>
