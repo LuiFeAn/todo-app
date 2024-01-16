@@ -23,7 +23,11 @@ export default function RootLayout({
       
       <body className={inter.className}>
 
-        <ToastContainer position={"bottom-left"}/>
+        <ToastContainer toastStyle={{
+          borderRadius:'15px',
+          textAlign:'center',
+          fontWeight:'bold'
+        }} position={"bottom-left"}/>
 
           <Header/>
           
