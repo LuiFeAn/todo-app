@@ -1,16 +1,28 @@
+"use client"
 
 export interface UserTokenPayload {
 
-    username: string
-    email: string
+    acessToken: string
+    user:{
+        username:string,
+        email: string
+    }
 
 }
 
 export default function userToken(){
+    
+    if (typeof window === 'undefined') {
+        return null;
+    }
 
     const token = localStorage.getItem("@AUTH_TOKEN");
 
-    const json: UserTokenPayload = JSON.parse(token!);
+    if (!token) {
+        return null;
+    }
+
+    const json: UserTokenPayload = JSON.parse(token);
 
     return json;
 

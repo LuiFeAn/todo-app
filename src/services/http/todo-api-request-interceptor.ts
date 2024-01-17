@@ -5,11 +5,11 @@ export default async function todoApiRequestInterceptor(config: InternalAxiosReq
 
     try {
         
-        const token = userToken();
+        const user = userToken();
 
-        if( token ){
+        if( user ){
     
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Authorization = `Bearer ${user.acessToken}`;
     
         }
     

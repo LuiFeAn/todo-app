@@ -5,8 +5,11 @@ import { toast } from "react-toastify";
 import { todoAPI } from "@/services/todo-api";
 import { AxiosError } from "axios";
 import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 export default function useLoginState(){
+
+    const route = useRouter();
 
     const loginSchema = yup.object().shape({
         email: yup.string().required("Informe seu email"),
@@ -27,7 +30,20 @@ export default function useLoginState(){
             });
 
             await toast.promise(promise,{
-                success:'Autenticado com sucesso',
+                success:{
+                    render({ data }){
+
+                        localStorage.setItem("@AUTH_TOKEN",JSON.stringify(data.data));
+
+                        document.cookie = `JWT=${data.data.acessToken}`;
+
+                        route.push('/todos');
+
+                        return `Bem-Vindo, ${data.data.user.username}`
+
+
+                    },
+                },
                 error:{
                     render({data}) {
                         
