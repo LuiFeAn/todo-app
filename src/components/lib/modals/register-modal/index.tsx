@@ -19,7 +19,7 @@ export default function RegisterModal({
     return (
         <Modal showModal={showModal}  onCloseModal={onCloseModal} title="REGISTRE-SE">
 
-           <form className="flex flex-col gap-[50px] items-center h-[100%] justify-center" onSubmit={submitForm}>
+           <form className="flex w-[30%] flex-col gap-[50px] items-center h-[100%] justify-center" onSubmit={submitForm}>
 
             
                 <InputLabel error={userForm.getter.errors.username}>
