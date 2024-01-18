@@ -29,11 +29,11 @@ export default function Modal({
     }
 
     return (
-        <div className="absolute h-screen backdrop-blur-[2px] w-screen z-50 text-black font-bold">
+        <div className="fixed top-0 left-0 h-screen backdrop-blur-[2px] w-screen z-50 text-black font-bold flex items-center justify-center">
 
-           <div className={`${ customStyle ? customStyle : "fixed bg-white w-[450px] top-[200px] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-[0_120px_120px_100px_rgba(0,0,0,0.3)] p-[20px] max-sm:w-[320px] max-sm:h-auto"}`}>
+           <div className={`${ customStyle ? customStyle : "relative bg-white rounded-2xl w-[100%] h-[100%] shadow-[0_120px_120px_100px_rgba(0,0,0,0.3)] overflow-scroll"}`}>
 
-                 <div className="w-[100%] text-end">
+                 <div className="absolute top-[20px] right-5">
 
                    <p onClick={onCloseModal} className="text-4xl select-none p-[20px] cursor-pointer m[50px]">X</p>
 
