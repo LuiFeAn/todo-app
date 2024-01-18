@@ -44,7 +44,7 @@ export default function TodosHomePage(){
     return (
         <div className="w-[100%] pb-[50px]">
 
-           <form onSubmit={handleButtonSearch} className="w-[100%] flex items-center justify-center gap-[20px] max-sm:flex-col">
+           <form onSubmit={handleButtonSearch} className="w-[100%] flex items-center justify-center gap-[20px] flex-col">
 
                 <label>
 
