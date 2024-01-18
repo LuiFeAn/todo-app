@@ -5,20 +5,10 @@ import InputLabel from "@/components/input-label"
 import DefaultButton from "@/components/lib/buttons/default-button"
 import DefaultInput from "@/components/lib/inputs/default-input"
 
-export interface IRedefineProps {
-
-    payload:{
-        payload:{
-            jwt: string
-        }
-    }
-
-}
-
-export default function Redefine({ payload }: IRedefineProps){
+export default function Redefine(props: any){
 
     const { redefinePasswordForm, submitForm } = useRedefinePassword({
-        jwt: payload.payload.jwt
+        jwt: props.payload.payload.jwt
     });
 
     return (
