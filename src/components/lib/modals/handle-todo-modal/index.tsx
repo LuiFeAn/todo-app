@@ -35,7 +35,7 @@ export default function HandleTodoModal({
 
         <h1 className="">{ actionType === "required" ? "Adicionar tarefa" : "Atualizar tarefa"}</h1>
 
-        <form onSubmit={sendForm} className="flex flex-col items-center justify-center
+        <form onSubmit={sendForm} className="flex flex-col items-center justify-center pb-[100px]
          gap-5">
 
             <InputLabel error={todoForm.getter.errors.title}>
@@ -48,22 +48,24 @@ export default function HandleTodoModal({
 
             <DefaultTextArea { ...todoForm.getter.getFieldProps("description")}  placeholder="Digite alguma coisa..."/>
 
+            <p>Data de conclusão:</p>
+
            <InputLabel error={todoForm.getter.errors.mustBeCompletedIn}>
 
+            
             <DefaultInput { ...todoForm.getter.getFieldProps('mustBeCompletedIn')} type="date"
 
             />
 
            </InputLabel>
 
+           <p>Prioridade:</p>
 
             <div className="w-[100%]">
 
-                <p className="text-red-600">Prioridade</p>
+                <label>
 
-                <br/>
-                
-                <select { ...todoForm.getter.getFieldProps('priority')} className="w-[100%] h-[50px] text-center">
+                    <select { ...todoForm.getter.getFieldProps('priority')} className="w-[100%] h-[50px] text-center">
 
                     <option data-value="High">
                         Alta
@@ -80,6 +82,8 @@ export default function HandleTodoModal({
                     </option>
 
                 </select>
+
+                </label>
 
             </div>
 

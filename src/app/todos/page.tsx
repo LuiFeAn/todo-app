@@ -60,7 +60,7 @@ export default function TodosHomePage(){
                 <DefaultButton content="Pesquisar"/>
 
                 { !loading.getter && userTodos.getter.length > 0 && (
-                    <span className="font-bold text-center text-sky-500">{allTodosCount.getter} listas / {allPages.getter} páginas </span>
+                    <span className="font-bold text-center text-sky-500">{allTodosCount.getter} Listas / {allPages.getter} Páginas </span>
                 )}
 
                 
