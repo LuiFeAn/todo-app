@@ -1,11 +1,12 @@
 import { todoAPI } from "@/services/todo-api";
 import { Todo } from "@/interfaces/todo";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import useLoading from "@/app/hooks/use-loading";
 import { TodosWithColorProp } from "@/interfaces/todo";
 
 export default function useTodosRequest(){
 
+    const [ search, setSearch ] = useState('');
     
     const { loading, setLoading } = useLoading();
 
@@ -23,6 +24,7 @@ export default function useTodosRequest(){
             params:{
                 page:0,
                 quanty:10,
+                title: search,
             }
            });
 
@@ -41,12 +43,12 @@ export default function useTodosRequest(){
                 color: colorMapping[todo.priority] || defaultColor,
             }));
 
-            console.log(addColorToTodos);
-
            setTodos(addColorToTodos);
 
 
         }catch(err){
+
+            setTodos([]);
 
         }finally{
 
@@ -62,6 +64,20 @@ export default function useTodosRequest(){
 
     },[]);
 
+    function handleTodoSearch(event: ChangeEvent<HTMLInputElement>){
+
+        setSearch(event.target.value);
+
+    }
+
+    async function handleButtonSearch(event: FormEvent<HTMLFormElement>){
+
+        event.preventDefault();
+
+        await getUserTodos();
+
+    }
+
     return {
         userTodos:{
             getter: todos,
@@ -71,7 +87,13 @@ export default function useTodosRequest(){
         loading:{
             getter: loading,
             setter: setLoading,
-        }
+        },
+        search:{
+            getter: search,
+            setter: setSearch,
+            handler: handleTodoSearch
+        },
+        handleButtonSearch,
     }
 
 }
