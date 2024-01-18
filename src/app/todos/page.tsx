@@ -85,13 +85,22 @@ export default function TodosHomePage(){
                 )}
 
                 { !loading.getter && userTodos.getter.length > 0 && userTodos.getter.map( todo => (
-                    <div className="w-[100%] max-sm:w-[100%] font-bold flex items-center justify-between mt-[20px] p-[10px] gap-[20px]" key={todo.id}>
+                    <div className="w-[100%] max-sm:w-[100%] font-bold flex items-center justify-between mt-[20px] gap-[10px]" key={todo.id}>
 
-                        <h3 className={`text-start ${
-                            todo.finishedIn ? 'line-through' : ''
-                        } truncate`}>{todo.title}</h3>
+                        <div className="flex justify-start items-center gap-3">
 
-                        <div className="flex cursor-pointer items-center justify-center gap-[15px]">
+                            <div className={`w-[15px] h-[15px] bg-${todo.color}-400 rounded-full `}>
+
+                            </div>
+
+
+                            <h3 className={`text-start ${
+                                todo.finishedIn ? 'line-through' : ''
+                            } text-wrap`}>{todo.title.toUpperCase()}</h3>
+
+                        </div>
+
+                        <div className="flex cursor-pointer items-center justify-center gap-[5px] break-words">
 
                                 { !todo.finishedIn && (
                                     <Image onClick={ () => concludeTodoHandler(todo.id)} className="cursor-pointer" src={conclusionIcon} alt="conclusion-icon" width={45} height={45}/>
