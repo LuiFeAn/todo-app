@@ -9,8 +9,6 @@ export default async function verifyJwtToken(jwt: string){
         return true
 
     }catch(err){
-        
-        console.log(err);
 
         return false
 
