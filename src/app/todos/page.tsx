@@ -87,7 +87,9 @@ export default function TodosHomePage(){
 
            <HandleTodoModal selectedTodo={selectedTodo.getter} obtainTodos={userTodos.handler} actionType={todoType.getter} onCloseModal={handleCloseShowModal} showModal={showTodoModal.getter}/>
 
-           <div className="w-[100%] flex-col justify-center items-center text-center p-[30px]">
+           { !showTodoModal.getter && (
+
+                <div className="w-[100%] flex-col justify-center items-center text-center p-[30px]">
 
 
                 { loading.getter && (
@@ -134,9 +136,9 @@ export default function TodosHomePage(){
                                     <Image onClick={ () => concludeTodoHandler(todo.id)} className="cursor-pointer" src={conclusionIcon} alt="conclusion-icon" width={35} height={35}/>
                                 ) }
 
-                                 { !todo.finishedIn && (
+                                { !todo.finishedIn && (
                                     <Image onClick={ () => {
-                                       
+                                    
                                         toNotRequiredHandler()
 
                                         selectedTodo.setter(todo);
@@ -154,7 +156,9 @@ export default function TodosHomePage(){
                     </div>
                 )) }
 
-           </div>
+                </div>
+
+           )}
 
           { userTodos.getter.length > 0 && (
              <ResponsivePagination

@@ -17,7 +17,7 @@ export default function RegisterModal({
     const { userForm, submitForm } = useRegisterUserModalState(onCloseModal);
 
     return (
-        <Modal customStyle="h-[700px]" showModal={showModal}  onCloseModal={onCloseModal} title="REGISTRE-SE">
+        <Modal showModal={showModal}  onCloseModal={onCloseModal} title="REGISTRE-SE">
 
            <form className="flex flex-col gap-[50px] items-center h-[100%]" onSubmit={submitForm}>
 
