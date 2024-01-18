@@ -1,16 +1,17 @@
-import JWT from 'jsonwebtoken';
+import { jwtVerify  } from "jose";
 
-export default function verifyJwtToken(jwt: string){
-
+export default async function verifyJwtToken(jwt: string){
+  
     try{
 
-         JWT.verify(jwt,process.env.JWT_API_SECRET as string);
+        await jwtVerify(jwt,new TextEncoder().encode(process.env.JWT_API_SECRET));
 
-         return true
+        return true
 
     }catch(err){
+        
 
-        return false;
+        return false
 
     }
 

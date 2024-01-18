@@ -6,17 +6,23 @@ export async function middleware(request: NextRequest) {
 
   const jwtToken = request.cookies.get("JWT");
 
+  const validJwt = await verifyJwtToken(jwtToken?.value!);
+
+  const urlRedirect = (path: string) => (
+    NextResponse.redirect(new URL(path,request.url))
+  )
+
+  if( request.nextUrl.pathname === "/" && validJwt ){
+
+    return urlRedirect('/todos');
+
+  }
+
   if(request.nextUrl.pathname.startsWith("/todos")){
 
-    if( !jwtToken ){
+    if( !validJwt){
 
-      return NextResponse.redirect(new URL("/",request.url));
-
-    }
-
-    if( verifyJwtToken(jwtToken.value) ){
-
-      return NextResponse.redirect(new URL("/",request.url));
+      return urlRedirect('/');
 
     }
 

@@ -19,9 +19,13 @@ import useShowTodoDescription from "./hooks/show-todo-description"
 import ShowTodoDescriptionModal from "@/components/lib/modals/show-todo-description-modal"
 import ResponsivePagination from 'react-responsive-pagination';
 import 'react-responsive-pagination/themes/classic.css';
+import useLogout from "./hooks/use-logout"
+import Link from "next/link"
 
 
 export default function TodosHomePage(){
+
+    const { handleLogout } = useLogout();
 
     const { userTodos, loading, search, handleButtonSearch, allPages, allTodosCount, currentPage } = useTodosRequest();
 
@@ -43,6 +47,12 @@ export default function TodosHomePage(){
 
     return (
         <div className="w-[100%] pb-[50px]">
+
+            <div className="absolute top-[20px] left-[20px]">
+
+                <Link href="/" onClick={handleLogout} className="font-bold cursor-pointer">SAIR</Link>
+
+            </div>
 
            <form onSubmit={handleButtonSearch} className="w-[100%] flex items-center justify-center gap-[20px] flex-col">
 
