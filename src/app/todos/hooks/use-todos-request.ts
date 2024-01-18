@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import useLoading from "@/app/hooks/use-loading";
 import { TodosWithColorProp } from "@/interfaces/todo";
 
+
 export default function useTodosRequest(){
 
     const [ search, setSearch ] = useState('');
@@ -12,6 +13,12 @@ export default function useTodosRequest(){
 
     const [ todos, setTodos ] = useState<TodosWithColorProp[]>([]);
 
+    const [ currentPage, setCurrentPage ] = useState(0);
+
+    const [ allPages, setAllPages ] = useState(0);
+
+    const [ allTodosCount, setAllTodosCount ] = useState(0);
+
     async function getUserTodos(){
         
         try{
@@ -19,16 +26,18 @@ export default function useTodosRequest(){
            setLoading(true);
 
            const response = await todoAPI.get<{
-            todoList: Todo[]
+            todoList: Todo[],
+            totalPages: number,
+            allTodosCount: number,
            }>("/todos",{
             params:{
-                page:0,
-                quanty:10,
+                page:currentPage,
+                quanty:15,
                 title: search,
             }
            });
 
-           const { data:{ todoList} } = response;
+           const { data:{ todoList, totalPages, allTodosCount} } = response;
 
             const colorMapping: Record<string, string> = {
                 High: 'green',
@@ -43,7 +52,11 @@ export default function useTodosRequest(){
                 color: colorMapping[todo.priority] || defaultColor,
             }));
 
+           setAllPages(totalPages);
+
            setTodos(addColorToTodos);
+
+           setAllTodosCount(allTodosCount);
 
 
         }catch(err){
@@ -63,6 +76,14 @@ export default function useTodosRequest(){
         getUserTodos();
 
     },[]);
+
+    useEffect( () => {
+
+        setTodos([]);
+
+        getUserTodos()
+
+    },[currentPage]);
 
     function handleTodoSearch(event: ChangeEvent<HTMLInputElement>){
 
@@ -92,6 +113,18 @@ export default function useTodosRequest(){
             getter: search,
             setter: setSearch,
             handler: handleTodoSearch
+        },
+        currentPage:{
+            getter: currentPage,
+            setter: setCurrentPage,
+        },
+        allPages:{
+            getter: allPages,
+            setter: setAllPages
+        },
+        allTodosCount:{
+            getter: allTodosCount,
+            setter: setAllTodosCount
         },
         handleButtonSearch,
     }

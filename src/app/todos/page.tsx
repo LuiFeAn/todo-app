@@ -15,10 +15,15 @@ import useAddTodoRequest from "./hooks/add-todo-request"
 import HandleTodoModal from "@/components/lib/modals/handle-todo-modal"
 import useTodoTypeHandler from "./hooks/use-todo-type-handler"
 import useSelectedTodo from "./hooks/use-selected-todo"
+import useShowTodoDescription from "./hooks/show-todo-description"
+import ShowTodoDescriptionModal from "@/components/lib/modals/show-todo-description-modal"
+import ResponsivePagination from 'react-responsive-pagination';
+import 'react-responsive-pagination/themes/classic.css';
+
 
 export default function TodosHomePage(){
 
-    const { userTodos, loading, search, handleButtonSearch } = useTodosRequest();
+    const { userTodos, loading, search, handleButtonSearch, allPages, allTodosCount, currentPage } = useTodosRequest();
 
     const { deleteTodoHandler } = useDeleteTodoRequest({
         getUserTodos: userTodos.handler,
@@ -34,14 +39,31 @@ export default function TodosHomePage(){
 
     const { selectedTodo } = useSelectedTodo();
 
+    const { handleCloseDescription, handleOpenDescription, showDescription, todo } = useShowTodoDescription();
+
     return (
-        <div className="w-[100%]">
+        <div className="w-[100%] pb-[50px]">
 
            <form onSubmit={handleButtonSearch} className="w-[100%] flex items-center justify-center gap-[20px] max-sm:flex-col">
 
-                <DefaultInput onChange={search.handler} placeholder="Pesquisar Todo"/>
+                <label>
 
+                    <p className="font-bold">Pesquisa</p>
+
+                    <br/>
+                        
+                    <DefaultInput onChange={search.handler} placeholder="Procurar lista"/>
+
+
+                </label>
+               
                 <DefaultButton content="Pesquisar"/>
+
+                { !loading.getter && userTodos.getter.length > 0 && (
+                    <span className="font-bold text-center text-sky-500">{allTodosCount.getter} listas / {allPages.getter} páginas </span>
+                )}
+
+                
 
            </form>
 
@@ -57,6 +79,12 @@ export default function TodosHomePage(){
 
            </div>
 
+           <ShowTodoDescriptionModal
+                todo={todo.getter!}
+                onCloseModal={handleCloseDescription}
+                showModal={showDescription.getter}
+           />
+
            <HandleTodoModal selectedTodo={selectedTodo.getter} obtainTodos={userTodos.handler} actionType={todoType.getter} onCloseModal={handleCloseShowModal} showModal={showTodoModal.getter}/>
 
            <div className="w-[100%] flex-col justify-center items-center text-center p-[30px]">
@@ -69,7 +97,7 @@ export default function TodosHomePage(){
                         visible={true}
                         height="120"
                         width="120"
-                        color="#4d66a9"
+                        color="#4977f5"
                         radius="9"
                         ariaLabel="three-dots-loading"
                         wrapperStyle={{}}
@@ -89,21 +117,21 @@ export default function TodosHomePage(){
 
                         <div className="flex justify-start items-center gap-3">
 
-                            <div className={`w-[15px] h-[15px] bg-${todo.color}-400 rounded-full `}>
+                            <div className={`w-[15px] h-[15px] rounded-full bg-${todo.color}-400 `}>
 
                             </div>
 
 
-                            <h3 className={`text-start ${
+                            <h3 onClick={ () => handleOpenDescription(todo)} className={`text-start  truncate whitespace-nowrap w-64 cursor-pointer ${
                                 todo.finishedIn ? 'line-through' : ''
-                            } text-wrap`}>{todo.title.toUpperCase()}</h3>
+                            } text-wrap`}>{(todo.title.toUpperCase().length >= 15 ? `${todo.title.slice(0,14)}...` : todo.title).toUpperCase()}</h3>
 
                         </div>
 
-                        <div className="flex cursor-pointer items-center justify-center gap-[5px] break-words">
+                        <div className="flex cursor-pointer items-center justify-end gap-[10px] break-words">
 
                                 { !todo.finishedIn && (
-                                    <Image onClick={ () => concludeTodoHandler(todo.id)} className="cursor-pointer" src={conclusionIcon} alt="conclusion-icon" width={45} height={45}/>
+                                    <Image onClick={ () => concludeTodoHandler(todo.id)} className="cursor-pointer" src={conclusionIcon} alt="conclusion-icon" width={35} height={35}/>
                                 ) }
 
                                  { !todo.finishedIn && (
@@ -114,10 +142,10 @@ export default function TodosHomePage(){
                                         selectedTodo.setter(todo);
                                     
                                         handleShowAddModal();
-                                    }} className="cursor-pointer" src={editIcon} alt="conclusion-icon" width={45} height={45}/>
+                                    }} className="cursor-pointer" src={editIcon} alt="edit-icon" width={42} height={42}/>
                                 ) }
 
-                                <Image onClick={ () => deleteTodoHandler(todo.id)}className="cursor-pointer" src={deleteIcon} alt="delete-icon" width={45} height={45}/>
+                                <Image onClick={ () => deleteTodoHandler(todo.id)}className="cursor-pointer" src={deleteIcon} alt="delete-icon" width={35} height={35}/>
 
                         </div>
 
@@ -127,6 +155,18 @@ export default function TodosHomePage(){
                 )) }
 
            </div>
+
+          { userTodos.getter.length > 0 && (
+             <ResponsivePagination
+                current={currentPage.getter}
+                total={allPages.getter}
+                onPageChange={ page => {
+
+                    currentPage.setter(page);
+
+                } }
+            />
+          )}
         
         </div>
     )

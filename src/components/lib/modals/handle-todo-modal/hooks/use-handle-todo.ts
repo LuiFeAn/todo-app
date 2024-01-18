@@ -76,11 +76,11 @@ export default function useHandleTodo({
                 success:{
                     async render(props) {
 
+                        closeModal();
+
                         setAllFieldsToFalsy();
 
                         await obtainTodos();
-
-                        closeModal();
                         
                         return requestSucessMessage;
 

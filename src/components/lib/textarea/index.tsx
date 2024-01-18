@@ -8,7 +8,7 @@ interface DefaultTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 export default function DefaultTextArea(props: DefaultTextAreaProps){
 
     return (
-        <textarea className={`border-blue-400 resize-none border-[3px] outline-blue-600 w-[100%] h-[200px] pl-[10px] pt-[10px]`} {...props}/>
+        <textarea className={`border-blue-400 resize-none border-[3px] outline-blue-600 w-[100%] h-[200px] pl-[10px] pr-[10px] pt-[10px]`} {...props}/>
     )
 
 }

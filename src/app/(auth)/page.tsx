@@ -29,7 +29,7 @@ export default function LoginPage(){
                 <RegisterModal showModal={showModal.getter} onCloseModal={onCloseRegisterHandler} />
             )}
 
-            <form onSubmit={submitForm} className="w-[100%] h-[100%] flex items-center justify-center">
+            <form onSubmit={submitForm} className="w-[100%] h-[100%] flex items-center justify-center pb-[50px]">
 
             <div className="flex items-center justify-center flex-col gap-[50px]">
 

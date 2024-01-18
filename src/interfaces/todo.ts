@@ -11,6 +11,6 @@ export interface Todo {
 
 export interface TodosWithColorProp extends Todo {
 
-    color: string | undefined;
+    color: string;
 
 }
