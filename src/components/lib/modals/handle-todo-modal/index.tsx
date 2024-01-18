@@ -33,7 +33,7 @@ export default function HandleTodoModal({
     return (
         <Modal showModal={showModal} onCloseModal={onCloseModal}>
 
-        <h1 className="">Adicionar Tarefa</h1>
+        <h1 className="">{ actionType === "required" ? "Adicionar tarefa" : "Atualizar tarefa"}</h1>
 
         <form onSubmit={sendForm} className="flex flex-col items-center justify-center
          gap-5">
@@ -83,7 +83,7 @@ export default function HandleTodoModal({
 
             </div>
 
-            <DefaultButton disabled={!todoForm.getter.isValid} content="Adicionar"/>
+            <DefaultButton disabled={!todoForm.getter.isValid} content={actionType === "required" ? "Adicionar tarefa" : "Atualizar tarefa"}/>
 
         </form>
 
