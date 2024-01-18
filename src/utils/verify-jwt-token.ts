@@ -10,6 +10,7 @@ export default async function verifyJwtToken(jwt: string){
 
     }catch(err){
         
+        console.log(err);
 
         return false
 
