@@ -18,7 +18,7 @@ import useSelectedTodo from "./hooks/use-selected-todo"
 
 export default function TodosHomePage(){
 
-    const { userTodos, loading } = useTodosRequest();
+    const { userTodos, loading, search, handleButtonSearch } = useTodosRequest();
 
     const { deleteTodoHandler } = useDeleteTodoRequest({
         getUserTodos: userTodos.handler,
@@ -37,13 +37,13 @@ export default function TodosHomePage(){
     return (
         <div className="w-[100%]">
 
-           <div className="w-[100%] flex items-center justify-center gap-[20px] max-sm:flex-col">
+           <form onSubmit={handleButtonSearch} className="w-[100%] flex items-center justify-center gap-[20px] max-sm:flex-col">
 
-                <DefaultInput placeholder="Pesquisar Todo"/>
+                <DefaultInput onChange={search.handler} placeholder="Pesquisar Todo"/>
 
                 <DefaultButton content="Pesquisar"/>
 
-           </div>
+           </form>
 
            <div className="fixed cursor-pointer top-10 right-3">
 
@@ -81,7 +81,7 @@ export default function TodosHomePage(){
 
 
                 { !loading.getter && userTodos.getter.length === 0 && (
-                    <h1>Você não possui nenhuma tarefa no momento !</h1>
+                    <h1 className="pt-[120px] font-bold">Nenhum lista encontrada</h1>
                 )}
 
                 { !loading.getter && userTodos.getter.length > 0 && userTodos.getter.map( todo => (
