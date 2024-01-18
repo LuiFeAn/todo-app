@@ -17,9 +17,9 @@ export default function useDeleteTodoRequest({
 
         await toast.promise(promise,{
             success:{
-                render(props) {
+                async render(props) {
                     
-                    getUserTodos();
+                    await getUserTodos();
 
                     window.scrollTo({
                         top:0,

@@ -20,8 +20,8 @@ export default function useConcludeTodoRequest({
 
         await toast.promise(promise,{
             success:{
-                render(props) {
-                    getUserTodos()
+                async render(props) {
+                    await getUserTodos()
                     return 'Tarefa concluida com sucesso'
                 },
             },
