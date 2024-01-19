@@ -33,7 +33,7 @@ export default function useLoginState(){
                 success:{
                     render({ data }){
 
-                        localStorage.setItem("@AUTH_TOKEN",JSON.stringify(data.data));
+                        localStorage.setItem("@AUTH_TOKEN",JSON.stringify(data.data));;
 
                         document.cookie = `JWT=${data.data.acessToken}`;
 

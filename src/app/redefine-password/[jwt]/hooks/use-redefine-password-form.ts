@@ -42,7 +42,7 @@ export default function useRedefinePassword({
                 success:{
                     render(props) {
 
-                        router.push('/')
+                        window.location.href = '/';
 
                         return 'Senha redefinida com sucesso !'
                     },
