@@ -67,6 +67,10 @@ export default function HandleTodoModal({
 
                     <select { ...todoForm.getter.getFieldProps('priority')} className="w-[100%] h-[50px] text-center">
 
+                    <option selected hidden>
+                        Selecione
+                    </option>
+
                     <option data-value="High">
                         Alta
                     </option>
@@ -77,7 +81,7 @@ export default function HandleTodoModal({
                     </option>
 
                     
-                    <option data-value="Low">
+                    <option selected data-value="Low">
                         Baixa
                     </option>
 
