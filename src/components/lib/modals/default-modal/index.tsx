@@ -29,7 +29,7 @@ export default function Modal({
     }
 
     return (
-        <div className="fixed top-0 left-0 h-screen backdrop-blur-[2px] w-screen z-50 text-black font-bold flex items-center justify-center">
+        <aside className="fixed top-0 left-0 h-screen backdrop-blur-[2px] w-screen z-50 text-black font-bold flex items-center justify-center">
 
            <div className={`${ customStyle ? customStyle : "relative bg-white rounded-2xl w-[100%] h-[100%] shadow-[0_120px_120px_100px_rgba(0,0,0,0.3)] overflow-scroll"}`}>
 
@@ -49,7 +49,7 @@ export default function Modal({
 
            </div>
 
-        </div>
+        </aside>
     )
 
 }

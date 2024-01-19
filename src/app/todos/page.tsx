@@ -41,7 +41,7 @@ export default function TodosHomePage(){
     const { handleCloseDescription, handleOpenDescription, showDescription, todo } = useShowTodoDescription();
 
     return (
-        <div className="w-[100%] pb-[50px]">
+        <main className="w-[100%] pb-[50px]">
 
            <form onSubmit={handleButtonSearch} className="w-[100%] flex items-center justify-center gap-[20px] flex-col">
 
@@ -61,7 +61,7 @@ export default function TodosHomePage(){
 
            </form>
 
-           <div className="fixed cursor-pointer top-10 right-3">
+           <section className="fixed cursor-pointer top-10 right-3">
 
                <Image onClick={ () => {
 
@@ -71,7 +71,7 @@ export default function TodosHomePage(){
 
                }} src={addIcon} width={50} height={80} alt="add-icon"></Image>
 
-           </div>
+           </section>
 
            <ShowTodoDescriptionModal
                 todo={todo.getter!}
@@ -109,7 +109,7 @@ export default function TodosHomePage(){
                 )}
 
                 { !loading.getter && userTodos.getter.length > 0 && userTodos.getter.map( todo => (
-                    <div className="w-[100%] max-sm:w-[100%] font-bold flex items-center justify-between mt-[20px] gap-[10px]" key={todo.id}>
+                    <section className="w-[100%] max-sm:w-[100%] font-bold flex items-center justify-between mt-[20px] gap-[10px]" key={todo.id}>
 
                         <div className="flex justify-start items-center gap-3">
 
@@ -147,7 +147,7 @@ export default function TodosHomePage(){
 
                         
 
-                    </div>
+                    </section>
                 )) }
 
                 </div>
@@ -166,7 +166,7 @@ export default function TodosHomePage(){
             />
           )}
         
-        </div>
+        </main>
     )
 
 }

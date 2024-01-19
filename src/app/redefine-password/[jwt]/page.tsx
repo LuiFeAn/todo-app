@@ -12,7 +12,9 @@ export default function Redefine(props: any){
     });
 
     return (
-        <form onSubmit={submitForm} className="w-[100%] flex flex-col gap-[10px] justify-center items-center">
+       <main>
+
+             <form onSubmit={submitForm} className="w-[100%] flex flex-col gap-[10px] justify-center items-center">
 
             <InputLabel error={redefinePasswordForm.getter.errors.password}>
             
@@ -23,6 +25,8 @@ export default function Redefine(props: any){
             <DefaultButton content="Redefinir"/>
 
         </form>
+
+       </main>
     )
 
 }

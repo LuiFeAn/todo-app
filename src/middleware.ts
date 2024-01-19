@@ -8,8 +8,6 @@ export async function middleware(request: NextRequest) {
 
   const validJwt = await verifyJwtToken(jwtToken?.value!);
 
-  console.log(validJwt);
-
   const urlRedirect = (path: string) => (
     NextResponse.redirect(new URL(path,request.url))
   )

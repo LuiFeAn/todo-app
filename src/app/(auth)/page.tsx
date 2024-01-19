@@ -23,7 +23,7 @@ export default function LoginPage(){
     });
 
     return(
-       <>
+       <main>
 
             { showModal.getter && (
                 <RegisterModal showModal={showModal.getter} onCloseModal={onCloseRegisterHandler} />
@@ -66,7 +66,7 @@ export default function LoginPage(){
         
        </form>
 
-       </>
+       </main>
     )
 
 }
